@@ -32,6 +32,12 @@ describe Location do
 
         expect( location.match?(wildcard) ).to be_true
       end
+
+      it "doesn't match a wildacrd location in another file" do
+        wildcard = WildcardLocation.new(other_file)
+
+        expect( location.match?(wildcard) ).to be_false
+      end
     end
   end
 
