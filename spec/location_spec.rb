@@ -25,6 +25,14 @@ describe Location do
 
       expect( location.match?(other) ).to be_true
     end
+
+    context 'a wildcard location' do
+      it 'matches a wildcard location in the same file' do
+        wildcard = WildcardLocation.new(file)
+
+        expect( location.match?(wildcard) ).to be_true
+      end
+    end
   end
 
   context 'displaying as a string' do
