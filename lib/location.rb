@@ -7,10 +7,21 @@ class Location
   end
 
   def match?(other)
-    file == other.file && line_no == other.line_no
+    file == other.file && (line_no == other.line_no || other.line_no == '*')
   end
 
   def to_s
     "#{file}:#{line_no}"
+  end
+end
+
+class WildcardLocation
+  attr_reader :file
+  def initialize(file)
+    @file = file
+  end
+
+  def line_no
+    '*'
   end
 end
