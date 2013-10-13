@@ -1,6 +1,5 @@
 class Location
   attr_reader :file, :line_no
-  protected :file, :line_no
 
   def initialize(file, line_no)
     @file, @line_no = file, line_no
@@ -26,6 +25,6 @@ class WildcardLocation
   end
 
   def match?(other)
-    true
+    file == other.file
   end
 end

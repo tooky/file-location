@@ -38,6 +38,7 @@ describe Location do
         wildcard = WildcardLocation.new(other_file)
 
         expect( location.match?(wildcard) ).to be_false
+        expect( wildcard.match?(location) ).to be_false
       end
     end
   end
