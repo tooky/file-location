@@ -27,4 +27,8 @@ class WildcardLocation
   def match?(other)
     file == other.file
   end
+
+  def to_s
+    file
+  end
 end

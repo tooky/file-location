@@ -3,6 +3,7 @@ describe Location do
   let(:file) { "foo.feature" }
   let(:line_no)  { 12 }
   let(:location) { Location.new(file, line_no) }
+  let(:wildcard) { WildcardLocation.new(file) }
 
   let(:other_file) { "bar.feature" }
   let(:other_line_no) { 99 }
@@ -28,8 +29,6 @@ describe Location do
 
     context 'a wildcard location' do
       it 'matches a wildcard location in the same file' do
-        wildcard = WildcardLocation.new(file)
-
         expect( location.match?(wildcard) ).to be_true
         expect( wildcard.match?(location) ).to be_true
       end
@@ -44,8 +43,12 @@ describe Location do
   end
 
   context 'displaying as a string' do
-    it 'shows "file:line_no' do
+    it 'shows "file:line_no" for a precise location' do
       expect( location.to_s ).to eq("foo.feature:12")
+    end
+
+    it 'shows "file" for a precise location' do
+      expect( wildcard.to_s ).to eq("foo.feature")
     end
   end
 end
