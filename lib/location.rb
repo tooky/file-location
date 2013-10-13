@@ -24,4 +24,8 @@ class WildcardLocation
   def line_no
     '*'
   end
+
+  def match?(other)
+    true
+  end
 end
