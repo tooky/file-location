@@ -67,11 +67,18 @@ describe Location do
   end
 
   context 'a ranged location' do
+    let(:ranged) { RangedLocation.new(file, 10..14) }
+
     it "matches a precise location within the range in the same file" do
-      ranged = RangedLocation.new(file, 10..14)
       other  = Location.new(file, 12)
 
       expect( ranged.match?(other) ).to be_true
+    end
+
+    it "doesn't match a precise location in another file" do
+      other = Location.new(other, 12)
+
+      expect( ranged.match?(other) ).to be_false
     end
   end
 
