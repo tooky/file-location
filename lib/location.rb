@@ -1,8 +1,17 @@
 class Location
-  attr_reader :file, :line_no
+  attr_reader :file
+
+  def initialize(file)
+    @file = file
+  end
+end
+
+class PreciseLocation < Location
+  attr_reader :line_no
 
   def initialize(file, line_no)
-    @file, @line_no = file, line_no
+    super(file)
+    @line_no = line_no
   end
 
   def match?(other)

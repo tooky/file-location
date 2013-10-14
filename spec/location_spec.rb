@@ -7,21 +7,21 @@ describe Location do
   let(:other_line_no) { 99 }
 
   context 'a precise location' do
-    let(:location) { Location.new(file, line_no) }
+    let(:location) { PreciseLocation.new(file, line_no) }
     it 'does not match a different precise location' do
-      other = Location.new(other_file, other_line_no)
+      other = PreciseLocation.new(other_file, other_line_no)
 
       expect( location.match?(other) ).to be_false
     end
 
     it 'does not match a different precise location in the same file' do
-      other = Location.new(file, other_line_no)
+      other = PreciseLocation.new(file, other_line_no)
 
       expect( location.match?(other) ).to be_false
     end
 
     it 'matches the same location in the same file' do
-      other = Location.new(file, line_no)
+      other = PreciseLocation.new(file, line_no)
 
       expect( location.match?(other) ).to be_true
     end
@@ -48,13 +48,13 @@ describe Location do
   context 'a wildcard location' do
     let(:wildcard) { WildcardLocation.new(file) }
     it 'matches a precise location in the same file' do
-      other = Location.new(file, other_line_no)
+      other = PreciseLocation.new(file, other_line_no)
 
       expect( wildcard.match?(other) ).to be_true
     end
 
     it "doesn't match a precise location in another file" do
-      other = Location.new(other_file, other_line_no)
+      other = PreciseLocation.new(other_file, other_line_no)
 
       expect( wildcard.match?(other) ).to be_false
     end
@@ -76,19 +76,19 @@ describe Location do
     let(:ranged) { RangedLocation.new(file, 10..14) }
 
     it "matches a precise location within the range in the same file" do
-      other  = Location.new(file, 12)
+      other  = PreciseLocation.new(file, 12)
 
       expect( ranged.match?(other) ).to be_true
     end
 
     it "doesn't match a precise location in another file" do
-      other = Location.new(other, 12)
+      other = PreciseLocation.new(other, 12)
 
       expect( ranged.match?(other) ).to be_false
     end
 
     it "doesn't match a precise location outside the range in the same file" do
-      other = Location.new(file, 5)
+      other = PreciseLocation.new(file, 5)
 
       expect( ranged.match?(other) ).to be_false
     end
@@ -102,7 +102,7 @@ describe Location do
 
   context 'displaying as a string' do
     it 'shows "file:line_no" for a precise location' do
-      location = Location.new(file, line_no)
+      location = PreciseLocation.new(file, line_no)
 
       expect( location.to_s ).to eq("foo.feature:12")
     end
