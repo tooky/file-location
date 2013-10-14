@@ -32,3 +32,13 @@ class WildcardLocation
     file
   end
 end
+
+class RangedLocation
+  def initialize(file, line_range)
+
+  end
+
+  def match?(other)
+    true
+  end
+end
