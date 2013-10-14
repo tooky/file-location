@@ -6,6 +6,9 @@ class Location
   end
 
   def match?(other)
+    if other.is_a? RangedLocation
+      return file == other.file && other.line_range.include?(line_no)
+    end
     file == other.file && (line_no == other.line_no || other.wildcard?)
   end
 

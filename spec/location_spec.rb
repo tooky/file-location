@@ -37,6 +37,12 @@ describe Location do
 
       expect( location.match?(wildcard) ).to be_false
     end
+
+     it "matches a range over the line in the same file" do
+       ranged = RangedLocation.new(file, 10..14)
+
+       expect( location.match?(ranged) ).to be_true
+     end
   end
 
   context 'a wildcard location' do
