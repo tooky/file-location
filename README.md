@@ -32,7 +32,7 @@ the_same_location = Location.new("my_file.feature", 1)
 another_location  = Location.new("my_file.feature", 5)
 
 a_location.match?(the_same_location) # => true
-a_location.match?(another_location)  # => true
+a_location.match?(another_location)  # => false
 ```
 
 You will find this class and it's specs in this directory.
