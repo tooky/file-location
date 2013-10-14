@@ -13,10 +13,6 @@ class Location
     line_no == other_line_no
   end
 
-  def wildcard?
-    false
-  end
-
   def to_s
     "#{file}:#{line_no}"
   end
@@ -28,19 +24,11 @@ class WildcardLocation
     @file = file
   end
 
-  def line_no
-    '*'
-  end
-
   def match?(other)
     file == other.file
   end
 
   def match_line?(other_line_no)
-    true
-  end
-
-  def wildcard?
     true
   end
 
