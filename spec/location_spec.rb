@@ -66,6 +66,15 @@ describe Location do
      end
   end
 
+  context 'a ranged location' do
+    it "matches a precise location within the range in the same file" do
+      ranged = RangedLocation.new(file, 10..14)
+      other  = Location.new(file, 12)
+
+      expect( ranged.match?(other) ).to be_true
+    end
+  end
+
   context 'displaying as a string' do
     it 'shows "file:line_no" for a precise location' do
       location = Location.new(file, line_no)
