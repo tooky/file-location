@@ -80,6 +80,12 @@ describe Location do
 
       expect( ranged.match?(other) ).to be_false
     end
+
+    it "doesn't match a precise location outside the range in the same file" do
+      other = Location.new(file, 5)
+
+      expect( ranged.match?(other) ).to be_false
+    end
   end
 
   context 'displaying as a string' do

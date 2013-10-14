@@ -34,12 +34,13 @@ class WildcardLocation
 end
 
 class RangedLocation
-  attr_reader :file
+  attr_reader :file, :line_range
   def initialize(file, line_range)
-    @file = file
+    @file       = file
+    @line_range = line_range
   end
 
   def match?(other)
-    file == other.file
+    file == other.file && line_range.include?(other.line_no)
   end
 end
