@@ -9,7 +9,11 @@ class Location
     if other.is_a? RangedLocation
       return file == other.file && other.line_range.include?(line_no)
     end
-    file == other.file && (line_no == other.line_no || other.wildcard?)
+    file == other.file && other.match_line?(line_no)
+  end
+
+  def match_line?(other_line_no)
+    line_no == other_line_no
   end
 
   def wildcard?
@@ -33,6 +37,10 @@ class WildcardLocation
 
   def match?(other)
     file == other.file
+  end
+
+  def match_line?(other_line_no)
+    true
   end
 
   def wildcard?
