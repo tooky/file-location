@@ -6,7 +6,11 @@ class Location
   end
 
   def match?(other)
-    file == other.file && (line_no == other.line_no || other.line_no == '*')
+    file == other.file && (line_no == other.line_no || other.wildcard?)
+  end
+
+  def wildcard?
+    false
   end
 
   def to_s
@@ -28,6 +32,10 @@ class WildcardLocation
     file == other.file
   end
 
+  def wildcard?
+    true
+  end
+
   def to_s
     file
   end
@@ -41,6 +49,6 @@ class RangedLocation
   end
 
   def match?(other)
-    file == other.file && line_range.include?(other.line_no) || other.line_no == '*'
+    file == other.file && line_range.include?(other.line_no) || other.wildcard?
   end
 end
