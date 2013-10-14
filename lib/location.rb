@@ -41,6 +41,6 @@ class RangedLocation
   end
 
   def match?(other)
-    file == other.file && line_range.include?(other.line_no)
+    file == other.file && line_range.include?(other.line_no) || other.line_no == '*'
   end
 end
